@@ -49,7 +49,7 @@ setInterval(() => {
         active = firstPosition; // Reset to first slide after last one
     }
     setSlider();
-}, 7000); // seconds interval
+}, 70000); // seconds interval
 
 
 
@@ -79,3 +79,27 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(sliderList);
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const cursor = document.querySelector(".cursor");
+  
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.display = "block";
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    });
+  
+    document.addEventListener("mouseleave", () => {
+      cursor.style.display = "none";
+    });
+  
+    document.addEventListener("mousedown", () => {
+      cursor.style.width = "30px";
+      cursor.style.height = "30px";
+    });
+  
+    document.addEventListener("mouseup", () => {
+      cursor.style.width = "20px";
+      cursor.style.height = "20px";
+    });
+  });
+  
