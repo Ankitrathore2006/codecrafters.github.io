@@ -50,3 +50,32 @@ setInterval(() => {
     }
     setSlider();
 }, 7000); // seconds interval
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const sliderList = document.querySelector(".slider .list");
+
+    let lastScrollY = window.scrollY; // Track scroll position
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            let currentScrollY = window.scrollY;
+
+            if (entry.isIntersecting && window.scrollY <= 300) {
+                sliderList.classList.add("show"); // Show when entering viewport
+            } else if (currentScrollY <= lastScrollY) { 
+                // If scrolling up and out of viewport, show again
+                sliderList.classList.add("show");
+            } else {
+                sliderList.classList.remove("show"); // Hide when scrolling down and out
+            }
+
+            lastScrollY = currentScrollY; // Update last scroll position
+        });
+    }, { threshold: 0.8 });
+
+    observer.observe(sliderList);
+});
+

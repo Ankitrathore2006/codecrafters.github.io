@@ -5,7 +5,26 @@
 body {
     margin: 0;
     font-size: 15px;
-    background-color: #2a2627;
+    height: auto;
+    background-color: #1a1718;
+    /* background-color: #000; */
+    overflow-x: hidden;
+    /* background-image: url(img/V1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center; */
+}
+
+html::-webkit-scrollbar {
+    background: transparent;
+    width: 0px;
+}
+
+html {
+    overflow-y: scroll !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
 }
 
 * {
@@ -18,6 +37,7 @@ body {
 nav svg {
     color: #000;
 }
+
 nav ul {
     display: flex;
     gap: 3rem;
@@ -92,6 +112,12 @@ header {
     position: relative;
     overflow: hidden;
     margin-top: -70px;
+    --mask:
+        radial-gradient(33.54px at 47% calc(100% - 45px), #000 99%, #0000 101%) calc(50% - 30px) 0/60px 100%,
+        radial-gradient(33.54px at 61% calc(100% + 30px), #0000 99%, #000 101%) 50% calc(100% - 15px)/60px 100% repeat-x;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+
 }
 
 .slider .list .item {
@@ -256,12 +282,18 @@ header {
     width: min(1000px, 100vw);
     height: 70%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(1.3) translateY(100%);
     background-image: url(img/model.png);
     background-size: cover;
     background-position: top;
     pointer-events: none;
-    animation: showModel 1s ease-in-out 1 forwards;
+    opacity: 0.9;
+    transition: transform 2s ease-in-out, opacity 1s ease-in-out;
+}
+
+.slider .list.show::after {
+    transform: translateX(-50%) scale(1) translateY(0);
+    opacity: 1;
 }
 
 @keyframes showModel {
@@ -274,6 +306,130 @@ header {
     opacity: 0;
     pointer-events: none;
 }
+
+.div {
+    text-transform: lowercase !important;
+}
+
+.progress-box {
+    width: 4rem;
+    position: fixed;
+    height: 85vh;
+    display: flex;
+    z-index: 12;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: rgb(255, 255, 255, 0.3);
+    height: 40%;
+    width: 4px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.progress-bar .progress {
+    /* height: 10%; */
+    width: 100%;
+    background-color: rgb(255, 255, 255, 0.9);
+    border-radius: 10px;
+    scale: 0 1;
+    animation: progress 1s linear;
+    animation-timeline: scroll();
+}
+
+@keyframes progress {
+    0% {
+        height: 0%;
+    }
+
+    100% {
+        height: 100%;
+    }
+
+    to {
+        scale: 1 1;
+    }
+}
+
+.main {
+    /* height: 200rem;
+    background: rgba(255, 255, 255, 0);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
+    border-radius: 10px; */
+    /* border: 1px solid rgba(255, 255, 255, 0.18); */
+}
+
+.marquee {
+    max-width: 1800px;
+    margin: auto;
+    width: 99%;
+    overflow: hidden;
+    --speed: 25s;
+    --item-width: 200px;
+    --item-gap: 25px;
+    --single-slide-speed: calc(var(--speed) / var(--num-items));
+    --item-width-plus-gap: calc(var(--item-width) + var(--item-gap));
+    --track-width: calc(var(--item-width-plus-gap)* calc(var(--num-items) - 1));
+  }
+  
+  .marquee-track {
+    container-type: inline-size;
+    display: grid;
+    grid-template-columns: var(--track-width) [track] 0px [resting];
+    width: max-content;
+  }
+  .marquee-item:hover {
+    animation-play-state: paused;
+  }
+  
+  .marquee-item {
+    width: var(--item-width);
+    aspect-ratio: 1 / 0.4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    border: 1.5px solid  rgb(255, 255, 255, 0.2);
+    border-left: none;
+    border-right: none;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  
+    grid-area: resting;
+    animation: marquee-move var(--speed) linear infinite var(
+        --direction,
+        forwards
+      );
+    animation-delay: calc(var(--single-slide-speed) * var(--item-position) * -1);
+  }
+  
+  .marquee-item svg {
+    height: 40%;
+    width: 60%;
+  }
+  
+  @keyframes marquee-move {
+    to {
+      transform: translateX(calc(-100cqw - 100%));
+    }
+  }
+
+
+
+
+
+
+
+
 
 
 
@@ -295,6 +451,16 @@ header {
 }
 
 @media all and (max-width: 767px) {
+
+    /* html{
+        overflow-y: scroll !important;
+        scrollbar-width: block !important;
+        -ms-overflow-style: block !important;
+    }
+    html::-webkit-scrollbar {
+        background: transparent;
+        width: auto;
+    } */
     .slider .list .item .content {
         grid-template-columns: 80%;
         justify-content: center;
@@ -312,16 +478,25 @@ header {
     }
 
     nav {
-        position: absolute;
+        position: fixed;
         color: white;
         top: 88vh;
         width: 100%;
         display: flex;
         justify-content: center;
     }
-    nav ul a{
+
+    nav ul a {
         color: white;
         font-weight: 200;
     }
-    
+
+    .progress-box {
+        display: none;
+    }
+    .marquee {
+        --speed: 25s;
+        --item-width: 150px;
+        --item-gap: 20px;
+    }
 }
