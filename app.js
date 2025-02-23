@@ -56,6 +56,7 @@ setInterval(() => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const sliderList = document.querySelector(".slider .list");
+    const navigator = document.querySelector(".navigation");
 
     let lastScrollY = window.scrollY; // Track scroll position
 
@@ -65,11 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (entry.isIntersecting && window.scrollY <= 300) {
                 sliderList.classList.add("show"); // Show when entering viewport
+                navigator.classList.remove("show"); // Show when entering viewport
             } else if (currentScrollY <= lastScrollY) { 
                 // If scrolling up and out of viewport, show again
                 sliderList.classList.add("show");
             } else {
                 sliderList.classList.remove("show"); // Hide when scrolling down and out
+                navigator.classList.add("show"); // Show when entering viewport
             }
 
             lastScrollY = currentScrollY; // Update last scroll position
@@ -102,4 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
       cursor.style.height = "20px";
     });
   });
+
   
+  const list = document.querySelectorAll(".list");
+
+function activeLink() {
+  list.forEach((item) => item.classList.remove("active"));
+  this.classList.add("active");
+}
+list.forEach((item) => item.addEventListener("click", activeLink));
