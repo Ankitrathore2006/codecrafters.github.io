@@ -5,7 +5,7 @@
 body {
   margin: 0;
   font-size: 15px;
-  height: 200rem;
+  /* height: 200rem; */
   background: rgb(0, 0, 0);
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.9668242296918768) 0%, rgba(0, 0, 0, 1) 100%);
   overflow-x: hidden;
@@ -104,7 +104,7 @@ header {
 .slider {
   color: #eee;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
   margin-top: -70px;
@@ -874,7 +874,6 @@ header .show {
   border: 2px solid #1a1f23;
   box-shadow: 0 20px 50px rgba(0, 0, 0, .5);
   border-radius: 15px;
-  /* z-index: 100; */
 }
 
 .bg-font .row {
@@ -974,15 +973,6 @@ i:hover {
 
 @media all and (max-width: 767px) {
 
-  /* html{
-        overflow-y: scroll !important;
-        scrollbar-width: block !important;
-        -ms-overflow-style: block !important;
-    }
-    html::-webkit-scrollbar {
-        background: transparent;
-        width: auto;
-    } */
   .slider .list .item .content {
     grid-template-columns: 80%;
     justify-content: center;
@@ -1053,7 +1043,7 @@ i:hover {
   }
 
   .services {
-    height: auto;
+    /* height: auto; */
   }
 
   .part-ab {

@@ -58,29 +58,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const sliderList = document.querySelector(".slider .list");
     const navigator = document.querySelector(".navigation");
 
-    let lastScrollY = window.scrollY; // Track scroll position
+    let lastScrollY = window.scrollY; // Store previous scroll position
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             let currentScrollY = window.scrollY;
 
-            if (entry.isIntersecting && window.scrollY <= 300) {
-                sliderList.classList.add("show"); // Show when entering viewport
-                navigator.classList.remove("show"); // Show when entering viewport
-            } else if (currentScrollY <= lastScrollY) { 
-                // If scrolling up and out of viewport, show again
+            if (entry.isIntersecting && currentScrollY <= 300) {
+                // Show sliderList and hide navigator when in viewport and near top
+                sliderList.classList.add("show");
+                navigator.classList.remove("show");
+            } else if (currentScrollY < lastScrollY) { 
+                // If scrolling up, show the sliderList again
                 sliderList.classList.add("show");
             } else {
-                sliderList.classList.remove("show"); // Hide when scrolling down and out
-                navigator.classList.add("show"); // Show when entering viewport
+                // If scrolling down, hide sliderList and show navigator
+                sliderList.classList.remove("show");
+                navigator.classList.add("show");
             }
 
-            lastScrollY = currentScrollY; // Update last scroll position
+            lastScrollY = currentScrollY; // Update scroll position for next event
         });
-    }, { threshold: 0.8 });
+    }, { threshold: 0.5 }); // Adjusted threshold to trigger more effectively
 
     observer.observe(sliderList);
+
+    // Extra fix: Ensure correct visibility when page loads at a scrolled position
+    if (window.scrollY > 300) {
+        sliderList.classList.remove("show");
+        navigator.classList.add("show");
+    }
 });
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const cursor = document.querySelector(".cursor");
