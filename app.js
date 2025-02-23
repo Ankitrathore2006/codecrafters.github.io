@@ -49,7 +49,9 @@ setInterval(() => {
         active = firstPosition; // Reset to first slide after last one
     }
     setSlider();
-}, 70000); // seconds interval
+}, 10000); // seconds interval
+
+
 
 
 

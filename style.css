@@ -479,23 +479,23 @@ header {
   display: flex;
   width: 80%;
   padding: 3rem 2rem;
-  gap: 5rem;
+  gap: 4rem;
   margin: auto;
   align-items: center;
   justify-content: space-evenly;
 }
 
-.part-ab .desc {
+.part-ab div .desc {
   font-size: 1.2em;
   text-align: left;
   word-spacing: 2px;
-  width: 30rem;
-  /* max-width: 615px; */
-  /* margin: 1.5rem auto; */
+  width: 28rem;
+  /* padding: 1rem; */
   color: rgb(255, 255, 255, 0.5);
   font-weight: 300;
   margin-bottom: 1rem;
 }
+
 
 .part-ab .animated {
   width: 30rem;
@@ -546,7 +546,7 @@ header {
   bottom: -1px;
   width: 102%;
   height: 70px;
-  background: rgb(34 35 39 / 30%);
+  background: rgb(34 35 39 / 50%);
   ;
   justify-content: center;
   align-items: center;
